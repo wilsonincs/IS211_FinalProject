@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="panel panel-primary">
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+{% if action == "modify" %}
+  <div class="panel-heading">
+    <h2>Edit book</h2>
+  </div>
+    <form action="{{ url_for('modify', post_id=book.id) }}" method="post" class="add-book form-horizontal">
+{% else %}
+  <div class="panel-heading">
+    <h2>New book</h2>
+  </div>
+    <form action="{{ url_for('add_book_post') }}" method="post" class="add-book form-horizontal">
+{% endif %}
+<input type="hidden" name="action" value="{{ action }}">
+<div class="panel-body">
+ <div class="control-group">
+    <label class="control-label" for="title">Title</label>
+
+    <div class="controls">
+        {% if book.title %}
+            <input type="text" class="form-control" name="title" id="title" value="{{ book.title }}">
+        {% else %}
+            <input type="text" class="form-control" name="title" id="title" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="Description">Description</label>
+
+    <div class="controls">
+        {% if book.description %}
+            <textarea id="description" class="form-control" name="description" rows="5">{{ book.description }}</textarea>
+        {% else %}
+            <textarea id="description" class="form-control" name="description" rows="5"></textarea>
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="authors">Authors</label>
+
+    <div class="controls">
+        {% if book.authors %}
+            <input type="text" class="form-control" name="authors" id="authors" value="{{ book.authors }}">
+        {% else %}
+            <input type="text" class="form-control" name="authors" id="authors" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="publisher">Publisher</label>
+
+    <div class="controls">
+        {% if book.publisher %}
+            <input type="text" class="form-control" name="publisher" id="publisher" value="{{ book.publisher }}">
+        {% else %}
+            <input type="text" class="form-control" name="publisher" id="publisher" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="publisherDate">Publish date</label>
+
+    <div class="controls">
+        {% if book.publisherDate %}
+            <input type="text" name="publisherDate" id="publisherDate" value="{{ book.publisherDate }}">
+        {% else %}
+            <input type="text" name="publisherDate" id="publisherDate" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="ISBN">ISBN</label>
+
+    <div class="controls">
+        {% if book.ISBN %}
+            <input type="text" name="ISBN" id="ISBN" value="{{ book.ISBN }}">
+        {% else %}
+            <input type="text" name="ISBN" id="ISBN" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="thumbnail">Thumbnail Link</label>
+
+    <div class="controls">
+        {% if book.thumbnail %}
+            <input type="text" class="form-control" name="thumbnail" id="thumbnail" value="{{ book.thumbnail }}">
+        {% else %}
+            <input type="text" class="form-control" name="thumbnail" id="thumbnail" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <label class="control-label" for="webReaderLink">Web reader link</label>
+
+    <div class="controls">
+        {% if book.webReaderLink %}
+            <input type="text" class="form-control" name="webReaderLink" id="webReaderLink" value="{{ book.webReaderLink }}">
+        {% else %}
+            <input type="text" class="form-control" name="webReaderLink" id="webReaderLink" >
+        {% endif %}
+    </div>
+ </div>
+
+ <div class="control-group">
+    <div class="controls">
+        {% if action == "modify" %}
+            <dd><input type="submit" value="Modify" class="btn btn-primary">
+                {% else %}
+            <dd><input type="submit" value="Add" class="btn btn-primary">
+        {% endif %}
+    </div>
+ </div>
+</div>
+</form>
+
+</div>
+{% endblock %}

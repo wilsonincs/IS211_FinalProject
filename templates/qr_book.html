@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block page_content %}
+    {% if book %}
+        <h2>Hi {{ session.username }}</h2>
+        <div class="text-center">
+            {% if book.borrower %}
+                {% if book.thumbnail %}
+                    <img src="{{ book.thumbnail }}" alt="img" height="100" width="80"/>
+                {% endif %}
+                {% if session.logged_in and book.borrower == session.username %}
+                    <p>Do you want to return <strong>{{ book.title }}</strong>?</p>
+                {% else %}
+                    <p>Looks like <strong>{{ book.borrower }}</strong> has <strong>{{ book.title }}</strong> borrowed!</p>
+                    <p>Do you want to return it for him?</p>
+                {% endif %}
+                <form action="{{ url_for('return_post', post_id=book.id) }}" method="post">
+                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <input type="submit" class="btn btn-primary" value="Return">
+                    <a href="{{ url_for('detail', post_id=book.id) }}" class="btn">Cancel</a>
+                </form>
+            {% else %}
+                {% if book.thumbnail %}
+                    <img src="{{ book.thumbnail }}" alt="img" height="100" width="80"/>
+                {% endif %}
+
+                <p>Do you want to borrow <strong>{{ book.title }}</strong>?</p>
+                <form action="{{ url_for('borrow_post', post_id=book.id) }}" method="post">
+                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <input type="submit" class="btn btn-primary" value="Borrow">
+                    <a href="{{ url_for('detail', post_id=book.id) }}" class="btn">Cancel</a>
+                </form>
+            {% endif %}
+        </div>
+    {% else %}
+        <h2>Book not found :(</h2>
+        <a href="{{ url_for('show_entries') }}" class="btn">Return</a>
+    {% endif %}
+{% endblock %}

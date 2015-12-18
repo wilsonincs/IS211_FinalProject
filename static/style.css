@@ -1,0 +1,191 @@
+/*body            { font-family: sans-serif; background: #eee; }*/
+/*a, h1, h2       { color: #377BA8; }*/
+/*h1, h2          { font-family: 'Georgia', serif; margin: 0; }*/
+/*h1              { border-bottom: 2px solid #eee; }*/
+/*h2              { font-size: 1.2em; }*/
+
+/*.page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;*/
+/*padding: 0.8em; background: white; }*/
+/*.books        { list-style: none; margin: 0; padding: 0; }*/
+/*.books li     { margin: 0.8em 1.2em; }*/
+/*.books li h2  { margin-left: -1em; }*/
+/*.add-book      { font-size: 0.9em; border-bottom: 1px solid #ccc; }*/
+/*.add-book dl   { font-weight: bold; }*/
+/*.metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;*/
+/*margin-bottom: 1em; background: #fafafa; }*/
+/*.flash          { background: #CEE5F5; padding: 0.5em;*/
+/*border: 1px solid #AACBE2; }*/
+/*.error          { background: #F0D6D6; padding: 0.5em; }*/
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+body {
+    background: none repeat scroll 0% 0% rgb(37, 61, 72);
+}
+
+.navbar-fixed-top {
+    height: 50px;
+}
+
+.navbar-fixed-top * {
+    min-height: 0px;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.title {
+    text-align: center;
+}
+
+.title div {
+    font-family: 'Lobster', cursive;
+    color: #EC7063;
+    font-size: 90px;
+    letter-spacing: 1px;
+    margin: auto;
+    display: inline;
+}
+
+.title a:hover {
+    text-decoration: none;
+}
+
+.title img {
+    height: 120px;
+    width: 120px;
+}
+
+.title .span12 {
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Lobster', cursive;
+    color: black;
+}
+
+.navbar-perso {
+    background-image: none !important;
+    background-color: white;
+    padding: 5px;
+    min-height: 25px;
+    color: white;
+}
+
+.navbar-perso > * > * > * {
+    margin: auto 2px;
+}
+
+a {
+    color: #EC7063;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+body > .container {
+    background: #FFFFFA;
+    padding: 20px 2%;
+    font-family: sans-serif;
+}
+
+form input, form textarea {
+    width: 80%;
+}
+
+/* ==========================================================================
+   Show books
+   ========================================================================== */
+
+.filter-books {
+    /*margin-bottom: 3px;*/
+    text-align: center;
+    top: -8px;
+    position: relative;
+}
+
+.filter-books > div {
+    display: inline;
+    margin: 0px 5px;
+}
+
+.table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+table td em {
+    font-size: 20px;
+    margin-right: 3px;
+    color: rgba(78, 78, 78, 0.62);
+}
+
+.table td {
+    font-size: 25px;
+    padding: 4px 8px;
+    height: 25px;
+}
+
+table form {
+    margin: 0px;
+    display: inline;
+}
+
+.table-books tr {
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Detail book
+   ========================================================================== */
+
+.book-author {
+    font-size: 20px;
+    color: #808080;
+    margin-left: 20px;
+    top: -8px;
+    position: relative;
+}
+
+.borrow-book-info {
+    font-size: 18px;
+    margin: 20px 0px;
+}
+
+.borrow-book-info > * {
+    display: inline;
+}
+
+.table-borrows td, .table-borrows th {
+    font-size: 15px;
+    text-align: center;
+}
+
+.table-borrows tr.borrow td {
+    background-color: #F2DEDE;
+}
+
+.table-borrows tr.return td {
+    background-color: #d3f2ca;
+}
+
+/* ==========================================================================
+   Add / Modify book
+   ========================================================================== */
+
+/* ==========================================================================
+   Add Google book
+   ========================================================================== */
+
+.table-resultsG td {
+    font-size: 15px;
+    padding: 4px 8px;
+}

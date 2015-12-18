@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="page-header">
+        <h1>Login</h1>
+    </div>
+
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <form class="form-horizontal col-md-9 col-md-push-3" action="{{ url_for('login') }}" method="post">
+        <div class="form-group form-group-lg">
+            <label class="control-label" for="username">Name</label>
+            <div class="controls">
+                <input class="form-control input-lg" type="text" id="username" name="username">
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <label class="control-label" for="mail">Mail (optional)</label>
+            <div class="controls">
+                <input class="form-control input-lg" type="text" id="mail" placeholder="Better if gravatar mail" name="mail">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-lg btn-primary">Login</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

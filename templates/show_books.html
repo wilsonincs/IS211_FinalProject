@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block page_content %}
+    {% if session.logged_in %}
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-primary btn-md" href="{{ url_for('QR_generate') }}">
+              <span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+                Generate QR file
+            </button>
+            <button class="btn dropdown-toggle btn btn-warning btn-md" data-toggle="dropdown">
+                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add book
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url_for('add_book') }}">From scratch</a></li>
+                <li><a href="{{ url_for('add_book_G') }}">Google books API</a></li>
+            </ul>
+        </div>
+
+        {% if borrowedBooks %}
+            <h2>My borrowed books</h2>
+            <table class="table table-bordered">
+                {% for borrowedBook in borrowedBooks %}
+                    <tr>
+                        <td>{{ borrowedBook.title }}
+                            <form action="{{ url_for('return_post', post_id=borrowedBook.id) }}" method="post">
+                                <input type="hidden" name="title" value="{{ borrowedBook.title }}">
+                                <input class="btn btn-primary pull-right" type="submit" value="Return">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
+<div class="jumbotron">
+{% if not session.logged_in %}
+    <h1 style="text-align: center">Hi, welcome to book manager!</h1>
+    {% else %}
+    <h1 style="text-align: center">Hi,{{ session.username }} welcome to Book Manager!</h1>
+    {% endif %}
+    <h2 style="text-align: center">Lets Look for some books </h2>
+    <div class="filter-books">
+        <div class="btn-group filter-books">
+             <button class="btn btn-primary" onclick="filterAll()">Display All</button>
+             <button class="btn btn-success" onclick="filterAvailable()"> Display Free</button>
+             <button class="btn btn-danger"  onclick="filterBorrowed()">Display Borrowed</button>
+        </div>
+        <div class="input-group input-group-lg input-prepend filter-books inline">
+            <input class="form-control" id="prependedInput" type="text" placeholder="filter books" onkeyup="filterTitle()">
+            <span class=" input-group-addon glyphicon glyphicon-search"></span>
+        </div>
+    </div>
+</div>
+    <table class="table table-hover table-books">
+     <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Borrower</th>
+     </tr>
+
+        {% for book in books %}
+            <tr {% if book.borrower %}class="error"{% endif %}
+                onclick="location.href='{{ url_for('detail', post_id=book.id) }}'">
+                <td>
+                    {{ book.title }}
+                </td>
+                <td>{{ book.authors }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>
+                    {% if book.borrowerGr %}
+                        <div>
+                         <span class="label label-warning">Borrowed by</span>
+                            <em>{{ book.borrower }}</em>
+                            <img src="{{ book.borrowerGr ~ "&s=25" }}" alt="img" height="25" width="25" class="img-rounded"/>
+                        </div>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% else %}
+            <p class="alert alert-warning" role="alert">
+               <em>Unbelievable. No books here so far! Lets add some</em>
+            </p>
+        {% endfor %}
+    </table>
+
+    {#    <ul class="books">#}
+    {#        {% for book in books %}#}
+    {#            <li {% if book.borrower %}class="borrowed"{% endif %}>#}
+    {#                <h2><a href="{{ url_for('detail', post_id=book.id) }}">{{ book.title }}</a></h2>#}
+    {#                {% if book.borrowerGr %}#}
+    {#                    <img src="{{ book.borrowerGr ~ "&s=25" }}" alt="img" height="25" width="25"/>#}
+    {#                {% endif %}#}
+    {#            </li>#}
+    {#        {% else %}#}
+    {#            <li><em>Unbelievable. No books here so far!</em></li>#}
+    {#        {% endfor %}#}
+    {#    </ul>#}
+    <script src="{{ url_for("static", filename="main.js") }}"></script>
+{% endblock %}

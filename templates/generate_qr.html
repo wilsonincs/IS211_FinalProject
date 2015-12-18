@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block page_content %}
+    <h2>Generate a QR file</h2>
+
+    <div class="btn-group filter-books inline">
+        <button class="btn" onclick="selectAll()">All</button>
+        <button class="btn"  onclick="selectNone()">None</button>
+    </div>
+
+    <div class="btn-group inline pull-right filter-books">
+        <button class="btn " onclick="showConfigQR()">Configure &raquo;</button>
+    </div>
+
+    <form action="{{ url_for('QR') }}" method="post" class="add-book form-horizontal">
+        <div id="QRConfig" class="collapse" >
+            <div class="control-group">
+                <label class="control-label" for="inputRows">Rows</label>
+                <div class="controls ">
+                    <input type="text" id="inputRows" name="inputRows" placeholder="Rows" class="input-medium" value="7">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputColumns">Columns</label>
+                <div class="controls">
+                    <input type="text" id="inputColumns" name="inputColumns" placeholder="Columns" class="input-medium" value="2">
+                </div>
+            </div>
+            <div class="control-group input-append">
+                <label class="control-label" for="qrSize">QR size</label>
+                <div class="controls">
+                    <input type="text" id="qrSize" name="qrSize" placeholder="QR size" class="input-medium" value="75">
+                    <span class="add-on">px</span>
+                </div>
+            </div>
+            <div class="control-group input-append">
+                <label class="control-label" for="columnSeparation">Column separation</label>
+                <div class="controls">
+                    <input type="text" id="columnSeparation" name="columnSeparation" placeholder="Column separation" class="input-medium" value="240">
+                    <span class="add-on">px</span>
+                </div>
+            </div>
+            <div class="control-group input-append">
+                <label class="control-label" for="rowSeparation">Row separation</label>
+                <div class="controls">
+                    <input type="text" id="rowSeparation" name="rowSeparation" placeholder="Row separation" class="input-medium" value="120">
+                    <span class="add-on">px</span>
+                </div>
+            </div>
+            <div class="control-group input-append">
+                <label class="control-label" for="leftOffset">Left Offset</label>
+                <div class="controls">
+                    <input type="text" id="leftOffset" name="leftOffset" placeholder="Left Offset" class="input-medium" value="70">
+                    <span class="add-on">px</span>
+                </div>
+            </div>
+            <div class="control-group input-append">
+                <label class="control-label" for="bottomOffset">Bottom Offset</label>
+                <div class="controls">
+                    <input type="text" id="bottomOffset" name="bottomOffset" placeholder="Bottom Offset" class="input-medium" value="10">
+                    <span class="add-on">px</span>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Generate</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            {% for book in books %}
+                <tr>
+                    <td style="text-align: center;">
+                        <input type="checkbox" name="{{ book.id }}" value="true">
+                    </td>
+                    <td>
+                        {{ book.title }}
+                    </td>
+                </tr>
+            {% else %}
+                <em>Unbelievable. No books here so far!</em>
+            {% endfor %}
+        </table>
+
+        <input type="submit" value="Generate" class="btn btn-primary">
+    </form>
+{% endblock %}
